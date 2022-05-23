@@ -1,0 +1,15 @@
+$color-black: #373a42;
+$color-gray: lighten($color-black, 30%);
+$color-light-gray: lighten($color-black, 60%);
+$color-red: #f00;
+$color-blue: #0080ff;
+$color-light-blue: #bddfff;// lighten($color-blue, 30%);
+$color-white: #fff;
+
+:export {
+  colorBlack: $color-black;
+  colorRed: $color-red;
+  colorBlue: $color-blue;
+  colorLightBlue: $color-light-blue;
+  colorWhite: $color-white;
+}
