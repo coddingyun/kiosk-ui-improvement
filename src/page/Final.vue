@@ -1,11 +1,12 @@
 <template>
   <Layout :titles="title">
     <div class="content">
-      <Button
-        title="시작하기"
-        :customStyle="buttonStyle"
-        @onClick="navigateNext"
-      />
+      <div class = "subtitle">
+          대기번호
+      </div>
+      <div class="waiting-number">
+          003
+      </div>
     </div>
   </Layout>
 </template>
@@ -23,17 +24,10 @@ export default {
   },
   data() {
     return {
-      title: ['안녕하세요,','롯데리아입니다', '아래 버튼을 눌러주세요'],
-      buttonStyle: {
-        padding: '50px 100px',
-      },
+      title: ['감사합니다', '영수증의 대기번호를', '확인해주세요'],
     }
   },
-  methods: {
-    navigateNext() {
-      this.$router.push('/place');
-    }
-  }
+
 }
 </script>
 <style scoped>
@@ -42,6 +36,17 @@ export default {
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+.subtitle {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.waiting-number {
+  font-size: 500px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
   margin-bottom: 100px;
 }
 </style>

@@ -2,13 +2,13 @@
   <Layout :titles="title">
     <div class="place-page">
       <Button
-        title="For Here"
-        color="light-blue"
-        @click="selectHere"
+        title="포장하기"
+        @click="selectGo"
       />
       <Button
-        title="To Go"
-        @click="selectGo"
+        title="매장에서 먹기"
+        color="light-blue"
+        @click="selectHere"
       />
     </div>
   </Layout>
@@ -28,12 +28,12 @@ export default {
   },
   data() {
     return {
-      title: ['드시고', '가시겠어요?'],
+      title: ['식사하실 장소를', '선택해주세요'],
     }
   },
   methods: {
     goToMenu() {
-      this.$router.push('/select-menu');
+      this.$router.push('/coupon');
     },
     selectHere() {
       this.store.setPlace('here');

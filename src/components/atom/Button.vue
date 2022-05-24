@@ -80,7 +80,7 @@ export default {
   &.wrapper {
     background: $color-light-blue;
     .text {
-      color: $color-white;
+      color: $color-blue;
     }
   }
 }
@@ -88,6 +88,15 @@ export default {
 .light-gray {
   &.wrapper {
     background: $color-light-gray;
+    .text {
+      color: $color-white;
+    }
+  }
+}
+
+.red {
+  &.wrapper {
+    background: $color-red;
     .text {
       color: $color-white;
     }

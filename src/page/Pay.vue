@@ -1,11 +1,7 @@
 <template>
   <Layout :titles="title">
     <div class="content">
-      <Button
-        title="시작하기"
-        :customStyle="buttonStyle"
-        @onClick="navigateNext"
-      />
+    <img class="image" src="@/assets/card.jpg" :onClick="goToFinal"/>  
     </div>
   </Layout>
 </template>
@@ -23,15 +19,12 @@ export default {
   },
   data() {
     return {
-      title: ['안녕하세요,','롯데리아입니다', '아래 버튼을 눌러주세요'],
-      buttonStyle: {
-        padding: '50px 100px',
-      },
+      title: ['아래 카드 투입구에', '카드를 넣어주세요'],
     }
   },
   methods: {
-    navigateNext() {
-      this.$router.push('/place');
+    goToFinal() {
+      this.$router.push('/final');
     }
   }
 }
@@ -41,7 +34,12 @@ export default {
   padding-top: 100px;
   display: flex;
   flex: 1;
-  flex-direction: column;
-  margin-bottom: 100px;
+  text-align: center;
+
+}
+.image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 </style>

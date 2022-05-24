@@ -1,10 +1,10 @@
 <template>
   <Layout :titles="title">
     <div class="content">
-      <Button
-        title="시작하기"
-        :customStyle="buttonStyle"
-        @onClick="navigateNext"
+    <img class="image" src="@/assets/barcord.png" :onClick="goToNext"/>  
+    <Button
+        title="없습니다"
+        @click="goToNext"
       />
     </div>
   </Layout>
@@ -14,7 +14,7 @@
 import {useOrderStore} from "@/store/order";
 
 export default {
-  name: 'StartPage',
+  name: 'CouponPage',
   setup() {
     const store = useOrderStore();
     return {
@@ -23,15 +23,12 @@ export default {
   },
   data() {
     return {
-      title: ['안녕하세요,','롯데리아입니다', '아래 버튼을 눌러주세요'],
-      buttonStyle: {
-        padding: '50px 100px',
-      },
+      title: ['쿠폰을 사용하시려면', '바코드를 찍어주세요'],
     }
   },
   methods: {
-    navigateNext() {
-      this.$router.push('/place');
+    goToNext() {
+      this.$router.push('/select-menu');
     }
   }
 }
@@ -43,5 +40,12 @@ export default {
   flex: 1;
   flex-direction: column;
   margin-bottom: 100px;
+
+}
+.image {
+    margin-bottom: 100px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 </style>

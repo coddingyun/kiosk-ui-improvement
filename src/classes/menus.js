@@ -4,7 +4,7 @@ import {Menu, SetMenu} from "@/classes/base";
 
 
 // Burger
-export const bulgogiBurger = new Menu(1, '불고기 버기', '맛있는 불고기버거에요');
+export const bulgogiBurger = new Menu(1, '불고기 버거', '맛있는 불고기버거에요');
 export const cheeseBurger = new Menu(2, '치즈 버거', '');
 export const hanwooBurger = new Menu(3, '한우불고기 버거', '');
 export const chickenBurger = new Menu(4, '치킨 버거', '');
@@ -21,7 +21,7 @@ export const squidRing = new Menu(1002, '오징어링', '');
 export const seasonedPotato = new Menu (1003, '양념 감자', '');
 
 // Beverage
-export const cocaCola = new Menu(10000, '코카콜라', '');
+export const cocaCola = new Menu(10000, '콜라', '');
 export const sprite = new Menu(10001, '스프라이트', '');
 export const zeroCola = new Menu(10002, '제로 콜라', '');
 export const fanta = new Menu(10003, '환타', '');

@@ -1,19 +1,8 @@
 <template>
   <Layout
     :titles="titles"
-    :descriptions="descriptions"
   >
     <div class="select-menu-page">
-      <div class="category">
-        <HSelect
-            :options="categories"
-            @select="onCategoryChange"
-            :selected="selectedCategory"
-        />
-      </div>
-      <div class="prev-page" v-if="hasPrev" @click="goPrevPage">
-        이전 페이지 보기
-      </div>
       <div class="menu-list">
         <MenuItem
           v-for="item in visibleItems"
@@ -22,24 +11,19 @@
           @select="onItemClick"
         />
       </div>
-      <div class="next-page" v-if="hasNext" @click="goNextPage">
-        다음 페이지 보기
-      </div>
     </div>
   </Layout>
 </template>
 
 <script>
-import HSelect from "@/components/atom/HSelect";
 import { menu } from '@/classes/menus';
 import MenuItem from "@/components/atom/MenuItem";
 import { useOrderStore } from '@/store/order';
 
 export default {
-  name: 'SelectMenuPage',
+  name: 'ChangeCokePage',
   components: {
     MenuItem,
-    HSelect
   },
   setup() {
     const store = useOrderStore();
@@ -50,9 +34,8 @@ export default {
   },
   data() {
     return {
-      titles: ['메뉴를', '선택해주세요.'],
-      descriptions: ['원하는 메뉴를 찾기 힘들다면', '음성검색을 눌러주세요.'],
-      selectedCategory: Object.keys(this.menu)[0],
+      titles: ['"'+this.store.chosenItem.name+'"에서', '사이드는 '+'"'+this.store.side.name+'"', '음료를 선택해주세요'],
+      selectedCategory: Object.keys(this.menu)[3],
       menuPage: 0,
       pageSize: 4,
     }
@@ -69,12 +52,6 @@ export default {
     items() {
       return this.menu[this.selectedCategory];
     },
-    hasPrev() {
-      return this.menuPage !== 0;
-    },
-    hasNext() {
-      return this.items.length > this.pageSize * (this.menuPage + 1);
-    },
     visibleItems() {
       const offset = this.pageSize * this.menuPage;
       return this.items.filter((_, index) => {
@@ -84,27 +61,20 @@ export default {
 
   },
   methods: {
-    onCategoryChange(value) {
-      this.menuPage = 0;
-      this.selectedCategory = value;
-    },
-    goPrevPage() {
-      this.menuPage--;
-    },
-    goNextPage() {
-      this.menuPage++;
-    },
     onItemClick(item) {
       console.log('--')
 
       console.log(item)
       console.log('--')
-      // this.store.setMenu(item.clone());
-      // console.log(this.store.menu[0]);
-      //this.store.commit('addItem', item);
-      this.store.menu.push(item.clone());
+      for(let i = 0; i < this.store.menu.length; i++) {
+        if(this.store.menu[i].id === this.store.chosenItem.id)  {
+            this.store.menu[i].menus[2] = item.clone();
+            break;
+        }
+      }
+      this.store.setBeverage(item.clone());
       console.log(this.store.menu[0]);
-      this.$router.push('/check-basket');
+      this.$router.push('/final-check');
     }
   }
 }

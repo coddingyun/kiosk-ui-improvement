@@ -7,12 +7,29 @@ import Place from "@/page/Place";
 import {createRouter, createWebHashHistory} from 'vue-router';
 import { createPinia } from 'pinia';
 import SelectMenu from "@/page/SelectMenu";
+import CheckBasket from "@/page/CheckBasket";
+import Pay from "@/page/Pay";
+import Final from "@/page/Final";
+import ChangeOrDelete from "@/page/ChangeOrDelete";
+import ChangeSide from "@/page/ChangeSide";
+import ChangeCoke from "@/page/ChangeCoke";
+import FinalCheck from "@/page/FinalCheck";
+import Coupon from "@/page/Coupon";
 
 
 const routes = [
     { path: '/', component: Start },
     { path: '/place', component: Place },
     { path: '/select-menu', component: SelectMenu },
+    { path: '/check-basket', component: CheckBasket },
+    { path: '/pay', component: Pay },
+    { path: '/final', component: Final },
+    { path: '/change-or-delete', component: ChangeOrDelete },
+    { path: '/change-side', component: ChangeSide },
+    { path: '/change-coke', component: ChangeCoke },
+    { path: '/final-check', component: FinalCheck },
+    { path: '/coupon', component: Coupon },
+
 ];
 const router = createRouter({
     history: createWebHashHistory(),
