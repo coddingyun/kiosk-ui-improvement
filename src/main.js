@@ -15,6 +15,7 @@ import ChangeSide from "@/page/ChangeSide";
 import ChangeCoke from "@/page/ChangeCoke";
 import FinalCheck from "@/page/FinalCheck";
 import Coupon from "@/page/Coupon";
+import ForNotSet from "@/page/ForNotSet";
 
 
 const routes = [
@@ -29,6 +30,7 @@ const routes = [
     { path: '/change-coke', component: ChangeCoke },
     { path: '/final-check', component: FinalCheck },
     { path: '/coupon', component: Coupon },
+    { path: '/for-not-set', component: ForNotSet },
 
 ];
 const router = createRouter({

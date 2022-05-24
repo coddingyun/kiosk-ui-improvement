@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       titles: ['"'+this.store.chosenItem.name+'"에서', '사이드를 선택해주세요'],
-      selectedCategory: Object.keys(this.menu)[2],
+      selectedCategory: Object.keys(this.menu)[4],
       menuPage: 0,
       pageSize: 4,
     }
@@ -72,6 +72,7 @@ export default {
       for(let i = 0; i < this.store.menu.length; i++) {
         if(this.store.menu[i].id === this.store.chosenItem.id)  {
             this.store.menu[i].menus[1] = item.clone();
+            this.store.menu[i].price += item.price;
             break;
         }
       }

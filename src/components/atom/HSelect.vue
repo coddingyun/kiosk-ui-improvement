@@ -3,7 +3,7 @@
     <div
       class="item"
       :class="{'active': isActive(option)}"
-      v-for="option in options"
+      v-for="option in options.slice(0,4)"
       :key="option.value"
       @click="onClickOption(option.value)"
     >

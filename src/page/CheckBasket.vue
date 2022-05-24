@@ -19,7 +19,7 @@
       </div>
       <Button
         class="pay-button"
-        title="결제하기"
+        :title= "totalPrice"
         color="blue"
         :customStyle="buttonStyle"
         @onClick="navigateNext"
@@ -31,6 +31,8 @@
 <script>
 import {useOrderStore} from "@/store/order";
 import MenuItem from "@/components/atom/MenuItem";
+
+
 
 export default {
   name: 'CheckBasketPage',
@@ -44,6 +46,10 @@ export default {
     }
   },
   data() {
+    let total_price = 0;
+    for(let i = 0; i < this.store.menu.length; i++) {
+      total_price += this.store.menu[i].price;
+    }
     return {
       title: ['현재 장바구니를', '확인해주세요'],
       descriptions: ['변경 및 삭제를 하시려면', '해당 메뉴를 눌러주세요.'],
@@ -53,6 +59,7 @@ export default {
       selectedCategory: Object.keys(this.store)[0],
       menuPage: 0,
       pageSize: 4,
+      totalPrice: (total_price).toString() + "원 결제하기",
     }
   },
   computed: {
@@ -75,8 +82,15 @@ export default {
     },
     onItemClick(item) {
       console.log(item);
+      console.log(typeof item);
+      console.log(Object.prototype.hasOwnProperty.call(item, 'menus'));
       this.store.setChosenItem(item.clone());
-      this.$router.push('/change-or-delete');
+      if (Object.prototype.hasOwnProperty.call(item, 'menus')){
+        this.$router.push('/change-or-delete');
+      }
+      else {
+        this.$router.push('/for-not-set');
+      }
     }
   }
 }

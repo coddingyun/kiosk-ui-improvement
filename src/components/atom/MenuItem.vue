@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <h5>{{item.name}}</h5>
-      <h6>{{item.description}}</h6>
+      <h6 v-html="menudescription"></h6>
       <div class="tags">
         <div class="tag"
              :key="`${menuItem.key}-sub`"
@@ -13,6 +13,9 @@
           {{ menuItem.name }}
         </div>
       </div>
+    </div>
+    <div class="price-tag">
+      <h5>{{item.price}}원</h5>
     </div>
   </div>
 </template>
@@ -24,6 +27,22 @@ export default {
     item: {
       type: Object,
       required: true,
+    }
+  },
+  data() {
+    return {
+      menudescription: this.item.description.replace(/\n/g, '<br />'),
+    }
+  },
+  // computed: {
+  //   descriptions() {
+  //     this.menudescription = this.menudescription.replace(/\n/g, '<br>');
+  //     return this.menudescription;
+  //   }
+  // },
+  watch: {
+    menudescription() {
+      this.menudescription = this.item.description.replace(/\n/g, '<br/>');
     }
   },
   methods: {
@@ -67,6 +86,11 @@ export default {
       font-weight: 700;
       margin-right: 15px;
     }
+  }
+  .price-tag{
+    margin-top:50px;
+    margin-left:auto;
+    text-align: right;
   }
 }
 </style>

@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       titles: ['"'+this.store.chosenItem.name+'"에서', '사이드는 '+'"'+this.store.side.name+'"', '음료를 선택해주세요'],
-      selectedCategory: Object.keys(this.menu)[3],
+      selectedCategory: Object.keys(this.menu)[5],
       menuPage: 0,
       pageSize: 4,
     }
@@ -69,6 +69,7 @@ export default {
       for(let i = 0; i < this.store.menu.length; i++) {
         if(this.store.menu[i].id === this.store.chosenItem.id)  {
             this.store.menu[i].menus[2] = item.clone();
+            this.store.menu[i].price += item.price;
             break;
         }
       }
