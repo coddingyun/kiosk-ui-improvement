@@ -64,8 +64,7 @@ export default {
       selectedCategory: Object.keys(this.store)[0],
       menuPage: 0,
       pageSize: 4,
-      totalPrice: (total_price).toString() + "원 결제하기",
-      //menuPrice: menu_price,
+      totalPrice: (total_price).toLocaleString() + "원 결제하기",
     }
   },
   computed: {
@@ -87,9 +86,6 @@ export default {
       this.$router.push('/select-menu');
     },
     onItemClick(item) {
-      console.log(item);
-      console.log(typeof item);
-      console.log(Object.prototype.hasOwnProperty.call(item, 'menus'));
       this.store.setChosenItem(item.clone());
       if (Object.prototype.hasOwnProperty.call(item, 'menus')){
         this.$router.push('/change-or-delete');

@@ -14,13 +14,14 @@ import ChangeOrDelete from "@/page/ChangeOrDelete";
 import ChangeSide from "@/page/ChangeSide";
 import ChangeCoke from "@/page/ChangeCoke";
 import FinalCheck from "@/page/FinalCheck";
-import Coupon from "@/page/Coupon";
 import ForNotSet from "@/page/ForNotSet";
+import Coupon from "@/page/Coupon";
 
 
 const routes = [
     { path: '/', component: Start },
     { path: '/place', component: Place },
+    { path: '/coupon', component: Coupon },
     { path: '/select-menu', component: SelectMenu },
     { path: '/check-basket', component: CheckBasket },
     { path: '/pay', component: Pay },
@@ -29,7 +30,6 @@ const routes = [
     { path: '/change-side', component: ChangeSide },
     { path: '/change-coke', component: ChangeCoke },
     { path: '/final-check', component: FinalCheck },
-    { path: '/coupon', component: Coupon },
     { path: '/for-not-set', component: ForNotSet },
 
 ];

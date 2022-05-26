@@ -13,7 +13,7 @@ export const useOrderStore = defineStore('order', {
             this.place = place;
         },
         setMenu(item) {
-            this.menu = item;
+            this.menu.push(item);
         },
         setChosenItem(item){
             this.chosenItem = item;

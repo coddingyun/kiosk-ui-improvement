@@ -1,12 +1,11 @@
-/* eslint-env node */
 <template>
   <div class="item" @click="onItemClick(item)">
     <div class="img-wrapper">
-      <img :src="imgSrc"/>
+      <img src="@/assets/bulgogi-set-white.jpeg"/>
     </div>
     <div class="content">
       <h5>{{item.name}}</h5>
-      <h6 v-html="menudescription"></h6>
+      <h6>{{item.description}}</h6>
       <div class="tags">
         <div class="tag"
              :key="`${menuItem.key}-sub`"
@@ -15,20 +14,26 @@
         </div>
       </div>
     </div>
-    <div class="price-tag">
-      <h5>{{totalPrice}}원</h5>
+    <div class="price">
+      <p>
+        {{ priceText }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-//import { require } from 'module';
 export default {
   name: 'MenuItem',
   props: {
     item: {
       type: Object,
       required: true,
+    }
+  },
+  computed: {
+    priceText() {
+      return `₩ ${this.item.price.toLocaleString()}`;
     }
   },
   data() {
@@ -41,16 +46,9 @@ export default {
     total_price *= this.item.amount;
     return {
       menudescription: this.item.description.replace(/\n/g, '<br />'),
-      imgSrc: require("@/assets/"+this.item.id+".jpg"),
       totalPrice: total_price,
     }
   },
-  // computed: {
-  //   descriptions() {
-  //     this.menudescription = this.menudescription.replace(/\n/g, '<br>');
-  //     return this.menudescription;
-  //   }
-  // },
   watch: {
     menudescription() {
       this.menudescription = this.item.description.replace(/\n/g, '<br/>');
@@ -66,7 +64,15 @@ export default {
 
 <style scoped lang="scss">
 .item {
+  border: 1px solid $color-light-gray;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px 0px, rgba(17, 17, 26, 0.05) 0px 8px 32px 0px;
+  background: $color-white;
+  border-radius: 15px;
+  margin-bottom: 15px;
   display: flex;
+  padding: 15px 0;
+  position: relative;
+  flex: 1;
   .img-wrapper {
     flex-basis: 250px;
     padding-right: 20px;
@@ -98,10 +104,16 @@ export default {
       margin-right: 15px;
     }
   }
-  .price-tag{
-    margin-top:50px;
-    margin-left:auto;
-    text-align: right;
+  .price {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 50px;
+    p {
+      font-size: 40px;
+      font-weight: 700;
+    }
   }
 }
 </style>
