@@ -14,6 +14,11 @@
         </div>
       </div>
     </div>
+    <div class="price">
+      <p>
+        {{ priceText }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -26,6 +31,11 @@ export default {
       required: true,
     }
   },
+  computed: {
+    priceText() {
+      return `₩ ${this.item.price.toLocaleString()}`;
+    }
+  },
   methods: {
     onItemClick(item) {
       this.$emit('select', item);
@@ -36,7 +46,15 @@ export default {
 
 <style scoped lang="scss">
 .item {
+  border: 1px solid $color-light-gray;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px 0px, rgba(17, 17, 26, 0.05) 0px 8px 32px 0px;
+  background: $color-white;
+  border-radius: 15px;
+  margin-bottom: 15px;
   display: flex;
+  padding: 15px 0;
+  position: relative;
+  flex: 1;
   .img-wrapper {
     flex-basis: 250px;
     padding-right: 20px;
@@ -66,6 +84,17 @@ export default {
       color: $color-blue;
       font-weight: 700;
       margin-right: 15px;
+    }
+  }
+  .price {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 50px;
+    p {
+      font-size: 40px;
+      font-weight: 700;
     }
   }
 }

@@ -7,11 +7,13 @@ import Place from "@/page/Place";
 import {createRouter, createWebHashHistory} from 'vue-router';
 import { createPinia } from 'pinia';
 import SelectMenu from "@/page/SelectMenu";
+import Coupon from "@/page/Coupon";
 
 
 const routes = [
     { path: '/', component: Start },
     { path: '/place', component: Place },
+    { path: '/coupon', component: Coupon },
     { path: '/select-menu', component: SelectMenu },
 ];
 const router = createRouter({

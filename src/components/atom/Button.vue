@@ -49,11 +49,16 @@ export default {
 
 <style scoped lang="scss">
 .wrapper {
+  transition: 200ms ease;
+  &:active:hover {
+    transform: scale(1.05);
+  }
   padding: 50px 50px;
   text-align: center;
   border-radius: 20px;
 
   .text {
+    user-select: none;
     font-size: 45px;
     font-weight: 900;
   }
