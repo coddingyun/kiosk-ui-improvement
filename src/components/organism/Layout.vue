@@ -53,6 +53,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      link : document.location.href,
+    }
+  },
   computed: {
     showNav() {
       return this.$router.currentRoute.value.path !== '/';
@@ -63,7 +68,12 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.back();
+      console.log(this.link);
+      if (this.link == "http://localhost:8080/#/check-basket") this.$router.push('/select-menu');
+      else if (this.link == "http://localhost:8080/#/select-menu") this.$router.push('/coupon');
+      else if (this.link == "http://localhost:8080/#/coupon") this.$router.push('/place');
+      else if (this.link == "http://localhost:8080/#/place") this.$router.push('/');
+      else this.$router.back();
     }
   }
 }

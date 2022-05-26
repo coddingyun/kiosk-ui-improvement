@@ -6,7 +6,6 @@
     </div>
     <div class="content">
       <h5>{{item.name}}</h5>
-      <h6 v-html="menudescription"></h6>
       <div class="tags">
         <div class="tag"
              :key="`${menuItem.key}-sub`"
@@ -14,6 +13,7 @@
           {{ menuItem.name }}
         </div>
       </div>
+      <h6 style="margin-top:5px;">수량: {{item.amount}}개</h6>
     </div>
     <div class="price-tag">
       <h5>{{totalPrice}}원</h5>
@@ -67,11 +67,13 @@ export default {
 <style scoped lang="scss">
 .item {
   display: flex;
+
   .img-wrapper {
     flex-basis: 250px;
     padding-right: 20px;
     img {
       width: 100%;
+      
     }
   }
   .content {

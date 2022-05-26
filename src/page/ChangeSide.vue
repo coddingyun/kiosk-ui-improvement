@@ -72,7 +72,8 @@ export default {
       for(let i = 0; i < this.store.menu.length; i++) {
         if(this.store.menu[i].id === this.store.chosenItem.id)  {
             this.store.menu[i].menus[1] = item.clone();
-            this.store.menu[i].price += item.price;
+            //this.store.menu[i].price += item.price;
+            this.store.menu[i].sideprice = item.price;
             break;
         }
       }

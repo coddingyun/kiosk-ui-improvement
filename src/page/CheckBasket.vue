@@ -5,7 +5,7 @@
       <Button
         class="basket-button"
         title="추가하기"
-        color="white"
+        color="light-blue"
         :customStyle="buttonStyle"
         @onClick="goToMenu"
       />
@@ -30,9 +30,7 @@
 
 <script>
 import {useOrderStore} from "@/store/order";
-import MenuItem from "@/components/atom/MenuItem";
-
-
+import MenuItem from "@/components/atom/MenuItemWithAmount";
 
 export default {
   name: 'CheckBasketPage',
@@ -48,7 +46,14 @@ export default {
   data() {
     let total_price = 0;
     for(let i = 0; i < this.store.menu.length; i++) {
-      total_price += this.store.menu[i].price;
+      let menu_price =0;
+      menu_price += this.store.menu[i].price;
+      if (Object.prototype.hasOwnProperty.call(this.store.menu[i], 'menus')){
+        menu_price += this.store.menu[i].sideprice;
+        menu_price += this.store.menu[i].cokeprice;
+      }
+      menu_price *= this.store.menu[i].amount;
+      total_price += menu_price;
     }
     return {
       title: ['현재 장바구니를', '확인해주세요'],
@@ -60,6 +65,7 @@ export default {
       menuPage: 0,
       pageSize: 4,
       totalPrice: (total_price).toString() + "원 결제하기",
+      //menuPrice: menu_price,
     }
   },
   computed: {
@@ -67,9 +73,9 @@ export default {
       return this.store.menu;
     },
     visibleItems() {
-      const offset = this.pageSize * this.menuPage;
+      //const offset = this.pageSize * this.menuPage;
       return this.items.filter((_, index) => {
-        return index >= offset && index < offset + this.pageSize;
+        return index >= 0 && index < 1000;
       });
     }
   },
@@ -103,8 +109,6 @@ export default {
   flex-direction: column;
 }
 .basket-button {
-  border-style: dashed;
-  border-color: #0080ff;
   margin-bottom: 100px;
 }
 .pay-button {
