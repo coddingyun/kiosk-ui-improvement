@@ -3,7 +3,7 @@ $color-gray: lighten($color-black, 30%);
 $color-light-gray: lighten($color-black, 60%);
 $color-red: #f00;
 $color-blue: #0080ff;
-$color-light-blue: #bddfff;// lighten($color-blue, 30%);
+$color-light-blue: lighten($color-blue, 46%);// lighten($color-blue, 30%);
 $color-white: #fff;
 
 :export {

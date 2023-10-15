@@ -11,20 +11,34 @@
             :selected="selectedCategory"
         />
       </div>
-      <div class="prev-page" v-if="hasPrev" @click="goPrevPage">
-        이전 페이지 보기
-      </div>
-      <div class="menu-list">
+      <transition name="pop">
+        <div class="prev-page" v-if="hasPrev" @click="goPrevPage">
+          이전 페이지 보기
+        </div>
+      </transition>
+
+      <transition-group
+        tag="div"
+        class="menu-list"
+        :css="false"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @select="onItemClick"
+      >
         <MenuItem
           v-for="item in visibleItems"
           :item="item"
           :key="item.id"
-          @select="onItemClick"
+          @click="onItemClick(item)"
         />
-      </div>
-      <div class="next-page" v-if="hasNext" @click="goNextPage">
-        다음 페이지 보기
-      </div>
+      </transition-group>
+      <transition name="pop">
+        <div class="next-page" v-if="hasNext" @click="goNextPage">
+          다음 페이지 보기
+        </div>
+      </transition>
     </div>
   </Layout>
 </template>
@@ -34,6 +48,7 @@ import HSelect from "@/components/atom/HSelect";
 import { menu } from '@/classes/menus';
 import MenuItem from "@/components/atom/MenuItem";
 import { useOrderStore } from '@/store/order';
+import Velocity from 'velocity-animate';
 
 export default {
   name: 'SelectMenuPage',
@@ -81,7 +96,6 @@ export default {
         return index >= offset && index < offset + this.pageSize;
       });
     }
-
   },
   methods: {
     onCategoryChange(value) {
@@ -95,34 +109,90 @@ export default {
       this.menuPage++;
     },
     onItemClick(item) {
-      console.log('--')
-
-      console.log(item)
-      console.log('--')
       this.store.setMenu(item.clone());
+      this.$router.push('/check-basket');
+    },
+
+
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+      el.style.top = '30px';
+    },
+    enter: function (el, done) {
+      const index = [...el.parentElement.children].indexOf(el);
+      const delay = index * 30 + 600;
+      setTimeout(function () {
+        Velocity(
+            el,
+            { opacity: 1, top: '0px' },
+            { complete: done }
+        )
+      }, delay)
+    },
+    beforeLeave: function () {
+    },
+    leave: function (el, done) {
+      const index = [...el.parentElement.children].indexOf(el);
+      const delay = index * 30;
+
+      setTimeout(function () {
+        Velocity(
+            el,
+            { opacity: 0, top: '30px' },
+            { complete: done }
+        )
+      }, delay)
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.pop-enter-from, .pop-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.pop-enter-active, .pop-leave-active {
+  transition: 200ms;
+}
+
+.pop-enter-to, .pop-leave {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.select-menu-page {
+  position: relative;
+}
 .category {
   margin-bottom: 20px;
 }
 .menu-list {
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
   border-radius: 20px;
-  //box-shadow: 1px 1px 4px $color-light-blue;
+  flex: 1;
 }
 .next-page, .prev-page {
-  background: $color-light-gray;
-  color: $color-gray;
+  background: $color-blue;
+  color: $color-white;
   text-align: center;
   padding: 25px;
   font-size: 24px;
   font-weight: 700;
   border-radius: 20px;
+}
+.prev-page {
+  transition-delay: 100ms;
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+.next-page {
+  position: sticky;
+  bottom: -10px;
+  width: inherit;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>

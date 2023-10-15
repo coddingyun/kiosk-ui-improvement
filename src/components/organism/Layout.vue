@@ -34,6 +34,7 @@
 
 <script>
 import BackButton from "@/components/atom/BackButton";
+
 export default {
   name: 'Layout',
   components: {BackButton},
@@ -59,7 +60,7 @@ export default {
     },
     hasDescription() {
       return this.$props.descriptions.length !== 0;
-    }
+    },
   },
   methods: {
     goBack() {
@@ -70,6 +71,78 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$content-transition: 400ms ease;
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: opacity 500ms ease;
+  nav {
+    div {
+      transition: $content-transition;
+    }
+  }
+  .header {
+    h1 {
+      transition: $content-transition;
+      @for $i from 0 through 5 {
+        &:nth-child(#{$i}) {
+          transition-delay: calc(#{$i} * 70ms);
+        }
+      }
+    }
+    h5 {
+      transition: $content-transition;
+      @for $i from 0 through 5 {
+        &:nth-child(#{$i}) {
+          transition-delay: calc(#{$i} * 60ms + 150ms);
+        }
+      }
+    }
+  }
+  .body {
+    transition: $content-transition;
+    transition-delay: 240ms;
+  }
+}
+
+.slide-up-enter-active {
+  .body {
+    transition-delay: 200ms;
+  }
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  nav {
+    div > * {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+  .header {
+    h1 {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    h5 {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  .body {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+}
+
+
+
+.mounted {
+
+}
+
+.unmounting {
+}
+
 nav {
   margin-bottom: 20px;
   padding: 10px 20px 0 20px;
@@ -84,6 +157,7 @@ nav {
   height: 100%;
   flex-direction: column;
   padding: 120px 60px;
+  padding-bottom: 0;
 }
 
 .header {
